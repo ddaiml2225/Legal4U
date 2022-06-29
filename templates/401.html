@@ -1,0 +1,9 @@
+{% extends 'base.html' %} 
+{% load static %} 
+{% block title %} <title>Unauthorized</title> {% endblock title %} 
+{% block content %}
+<h1 class="text-center alert alert-dark">Unauthorized</h1>
+<div class="container-fluid text-center">
+  <img src="{% static 'images/other/unauthorized.jpg' %}" class="imf-fluid w-100 h-100"/>
+</div>
+{% endblock content %}

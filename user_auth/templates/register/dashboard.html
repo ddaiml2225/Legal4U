@@ -1,0 +1,96 @@
+{% extends 'base.html' %} 
+{% load static %} 
+{% block title %}<title>Register</title> {% endblock title %} 
+{% block content %}
+{% if alert %}
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+  <strong>Case Filed!</strong> Wait for a lawyer to accept your case
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+{% endif %}
+{% if user_verified %}
+  <h1 style="margin:3rem; text-align: center; font-family: Trebuchet MS, Helvetica, sans-serif;">All Your Cases</h1>
+  <div class="alert alert-info my-2 w-75 mx-auto" role="alert">
+    Verify Yourself <a href="/auth/verify" class="alert-link">Verify</a>
+  </div>
+{% endif %}
+<br>
+<div class="card border-dark my-2 w-75 mx-auto">
+  <div class="card-body">
+    <h5 class="card-title">Raise a Case</h5>
+    <div class="text-center">
+      <form action = "/auth/case/" method='POST'>
+        {% csrf_token %}
+        <div class="form-group">
+          <label for="postTitle">Problem/ Issue Faced</label>
+          <input type="text" class="form-control" id="postTitle" name="title" placeholder="Confused about something?">
+        </div>
+        <div class="form-group">
+          <label for="postContent">Problem Description</label>
+          <textarea class="form-control" id="postContent" name = "content" rows="3"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Post</button>
+      </form>
+    </div>
+  </div>
+</div>
+<div class="alert alert-warning w-75 mx-auto text-center" role="alert">
+  All your Previous Cases
+</div>
+<div class="infinite-container">
+    {% for card in cards %}
+    <div class="infinite-item w-75 mx-auto">
+      <a href="/feed/case/{{card.id}}" style="color: inherit; text-decoration: inherit">
+        <div class="d-flex justify-content-center">
+          <div class="card bg-{{card.status}} border-dark text-white my-3 w-100">
+            <div class="card-header text-white">
+              {{card.nick}}
+              {% if card.verified %}<span><i class="fa-solid fa-circle-check"></i></span>{% endif %}
+            </div>
+            <div class="card-body text-white">
+              <h5 class="card-title">{{card.title}}</h5>
+              <p class="card-text">{{card.content}}</p>
+              <div class="card-footer text-white text-right">
+                {{card.timestamp}}
+              </div>
+            </div>
+          </div>
+        </div>
+      </a>
+    </div>
+    {% endfor %}
+  </div>
+  
+  <div>
+    <span>
+      {% if cards.has_next %}
+      <a class="infinite-more-link" href="?page={{cards.next_page_number}}">
+        More
+      </a>
+      {% endif %}
+    </span>
+  </div>
+  
+  <div class="loading" style="display: none">Loading...</div>
+  
+
+{% endblock content %}
+{% block scripts %}
+<script src="{% static 'js/jquery.waypoints.min.js' %}"></script>
+<script src="{% static 'js/infinite.min.js' %}"></script>
+
+<script>
+  var infinite = new Waypoint.Infinite({
+    element: $(".infinite-container")[0],
+    offset: "bottom-in-view",
+    onBeforePageLoad: function () {
+      $(".loading").show();
+    },
+    onAfterPageLoad: function ($items) {
+      $(".loading").hide();
+    },
+  });
+</script>
+{% endblock scripts %}

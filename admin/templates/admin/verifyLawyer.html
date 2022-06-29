@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+  <title>𝐋𝐞𝐠𝐚𝐥𝟒𝐔 | Verify</title>
+{% endblock title %}
+{% block content %}
+  <h3 class="text-center alert alert-success">Verified Lawyers: <strong>{{verified}}</strong></h3>
+  <h3 class="text-center alert alert-danger">Unverified Lawyers: <strong>{{unverified}}</strong></h3>
+  <label class="form-label" for="progressbar">Progress:</label>
+  <div class="progress" id="progressbar">
+    <div class="progress-bar" role="progressbar"  style="width: {{progress}}%;" aria-valuenow="{{verified}}" aria-valuemin="0" aria-valuemax="{{total}}">{{progress}}%</div>
+  </div>
+  <div class="infinite-container">
+    <div class="row mx-2 infinite-item">
+      {% for card in cards %}
+        <div class="col-sm-4 my-2 ">
+          <div class="card" >
+            <div class="card-body">
+              <h5 class="card-title">{{card.name}}</h5>
+              <h6 class="card-subtitle mb-2 text-muted">Advocate ID: {{card.enroll}}</h6>
+              <p class="card-text">
+                Experience: {{card.exp}} years
+                <br>
+                Date of Birth: {{card.dob}}
+                <br>
+                Gender: {{card.sex}}
+              </p>
+              <a href="verify/{{card.id}}" class="card-link">Detail</a>
+              <a href="/admin/verified/{{id}}" type="button" class="btn btn-success float-right">Verify</a>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+  
+  <div>
+    <span>
+      {% if cards.has_next %}
+      <a class="infinite-more-link" href="?page={{cards.next_page_number}}">
+        More
+      </a>
+      {% endif %}
+    </span>
+  </div>
+  
+  <div class="loading" style="display: none">Loading...</div>
+  
+{% endblock content %}
+{% block scripts %}
+  <script src="{% static 'js/jquery.waypoints.min.js' %}"></script>
+  <script src="{% static 'js/infinite.min.js' %}"></script>
+
+  <script>
+    var infinite = new Waypoint.Infinite({
+      element: $(".infinite-container")[0],
+      offset: "bottom-in-view",
+      onBeforePageLoad: function () {
+        $(".loading").show();
+      },
+      onAfterPageLoad: function ($items) {
+        $(".loading").hide();
+      },
+    });
+  </script>
+{% endblock scripts %}

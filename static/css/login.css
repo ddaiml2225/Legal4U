@@ -1,0 +1,15 @@
+body {
+    text-align: center;
+    font-family: "Times New Roman", sans-serif;
+    background-color: #fff;
+  }
+.image{
+    height: 15rem;
+    width: 15rem;
+    padding: 1rem;
+    margin: auto;
+    
+}
+#DOB{
+    width:14rem;
+}

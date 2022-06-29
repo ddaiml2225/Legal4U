@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+  <title>𝐋𝐞𝐠𝐚𝐥𝟒𝐔 | {{name}}</title>
+{% endblock title %}
+{% block content %}
+  <div class="card mx-auto my-2" style="width: 18rem;">
+    <a href="#" id="pop">
+      <img id="imageresource" class="card-img-top" src="{{proof}}" alt="Card image cap">
+    </a>
+    <div class="card-body">
+      <h5 class="card-title">{{name}}</h5>
+      <h6 class="card-subtitle mb-2 text-muted">Advocate ID: {{enroll}}</h6>
+    </div>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">Public nickname: {{nickname}}</li>
+      <li class="list-group-item">Date of Birth: {{dob}}</li>
+      <li class="list-group-item">Gender: {{sex}}</li>
+      <li class="list-group-item">Experience: {{exp}} years</li>
+      <li class="list-group-item">Email: {{email}}</li>
+      <li class="list-group-item">Phone Number: {{phone}}</li>
+    </ul>
+    <div class="card-body">
+      <a href="javascript:history.back()" class="card-link">Back</a>
+      <a href="/admin/verified/{{id}}" type="button" class="btn btn-success float-right">Verify</a>
+    </div>
+  </div>
+
+  <!-- Creates the bootstrap modal where the image will appear -->
+  <div class="modal fade" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title" id="myModalLabel">Lawyer Photo ID</h4>
+          <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        </div>
+        <div class="modal-body">
+          <img src="" id="imagepreview"  style="width: 100%; height: 100%;">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+{% endblock content %}
+
+{% block scripts %}
+<script>
+  $("#pop").on("click", function() {
+    $('#imagepreview').attr('src', $('#imageresource').attr('src')); // here asign the image to the modal when the user click the enlarge link
+    $('#imagemodal').modal('show'); // imagemodal is the id attribute assigned to the bootstrap modal, then i use the show function
+ });
+</script>
+{% endblock scripts %}

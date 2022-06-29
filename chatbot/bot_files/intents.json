@@ -1,0 +1,117 @@
+{
+  "intents": [
+      {
+          "tag": "greeting",
+          "patterns": [ "Hi", "How are you", "Is anyone there?", "Hello", "Good day" ],
+          "responses": [ "Hello, How can your tai help you",  "Hi there, your tai is all ready to help" ],
+          "context_set": ""
+      },
+      {
+          "tag": "goodbye",
+          "patterns": [ "Bye", "See you later", "Goodbye" ],
+          "responses": [ "See you later, thanks for visiting", "Have a nice day", "Bye! Come back again soon." ]
+      },
+      {
+          "tag": "complain",
+          "patterns": [ "Who can be a complainant under the Act?", "what is complainant under the Act?", "what is complainant" ],
+          "responses": [ "Any woman who is, or has been in a domestic or family relationship with the respondent and who has been subjected to domestic violence, can file a complaint under the Protection of Women from Domestic Violence, Act, 2005 for redressal of her grievance." ]
+      },
+      {
+          "tag": "aggrieved",
+          "patterns": [ "Who is aggrieved person ?","what is a aggrieved person" ],
+          "responses": [ "aggrieved person means any woman who is, or has been, in a domestic relationship with the respondent and who alleges to have been subjected to any act of domestic violence by the respondent." ]
+      },
+      {
+          "tag": "child",
+          "patterns": [ "what does child mean ?", "who is a child?" ],
+          "responses": [ "child means any person below the age of eighteen years and includes any adopted, step or foster child"]
+      },
+      {
+          "tag": "compensation",
+          "patterns": [ "what does compensation order mean ?", "what is meaning of compensation order?" ],
+          "responses": [ " compensation order means an order granted in terms of section 22" ]
+      },
+      {
+          "tag": "domestic incident",
+          "patterns": [ "What is domestic incident report ?","domestic incident report" ],
+          "responses": [ "domestic incident report means a report made in the prescribed form on receipt of a complaint of domestic violence from an aggrieved person" ]
+      },
+      {
+          "tag": "domestic relationship",
+          "patterns": [ "What is domestic relationship ?","about domestic relationship" ],
+          "responses": [ "domestic relationship means a relationship between two persons who live or have, at any point of time, lived together in a shared household, when they are related by consanguinity, marriage, or through a relationship in the nature of marriage, adoption or are family members living together as a joint family;" ]
+          
+      },
+      {
+          "tag": "dowry",
+          "patterns": [ "what is Dowry ?", "tell me about dowry" ],
+          "responses": [ "dowry shall have the same meaning as assigned to it in section 2 of the Dowry Prohibition Act, 1961" ]
+      },
+      {
+          "tag": "Monetary ",
+          "patterns": [ " What is Monetary relief", "about Monetary relief", "Monetary relief" ],
+          "responses": [ " monetary relief means the compensation which the Magistrate may order the respondent to pay to the aggrieved person, at any stage during the hearing of an application seeking any relief under this Act, to meet the expenses incurred and the losses suffered by the aggrieved person as a result of the domestic violence." ]
+      },
+      {
+          "tag": "protection ",
+          "patterns": [ "What is protection order ?", "explain protection order ", "tell me about protection order " ],
+          "responses": [ "protection order means an order made in terms of section 18 of DV Act 2005." ]
+      },
+      {
+          "tag": "residence order",
+          "patterns": [ "What is residence order?", "explain residence order?", "tell me about residence order" ],
+          "responses": [ "residence order means an order granted in terms of sub-section (1) of section 19 ." ]
+      },
+      {
+          "tag": "household",
+          "patterns": [ "What is a shared household?", "explain  shared household" ],
+          "responses": [ "A shared household is a household where the aggrieved person lives or has ever lived in a domestic relationship. It includes alloted, tenanted or joint family property in which the complainant or the respondent has any right. The Supreme Court has recently, by a judgment delivered on 15th December, 2006 clarified that shared-household does not include the self acquired property of mother-in-law of the aggrieved person." ]
+      },
+      {
+          "tag": "respondent",
+          "patterns": [ "Who is respondent under the Act?", "explain  respondent under the Act" ],
+          "responses": [ " A respondent means any adult male person who is, or has been, in a domestic relationship with the aggrieved person and against whom the aggrieved person has sought relief under the Act. " ]
+      },
+      {
+          "tag": "domestic violence",
+          "patterns": [ "What are the authorities for the protection of victims of domestic violence?", "explain protection of victims of domestic violence" ],
+          "responses": [ " The Act provides for appointment of Protection Officers and NGOs (Non-Government Organizations) as service providers for assisting the victims. Magistrates & Police Officers will assist the aggrieved woman as provided under the Act. " ]
+      },
+      {
+          "tag": "domestic violence protection",
+          "patterns": [ "How can i get protection under the Domestic viollence Act?", "protection under the Domestic viollence Act" ],
+          "responses": [ "An aggrieved person or a protection officer, or any other person on behalf of the aggrieved person may present an application to the Magistrate for relief and protection. " ]
+      },
+      {
+          "tag": "domestic relief",
+          "patterns": [ "explain relief under domestic violence act", "what is relief under domestic violence act?" ],
+          "responses": [ "After hearing the aggrieved person and the respondent, the Magistrate may pass any of the following orders:\n (i) Protection Order. \n(ii) Residence order.\n(iii) Order providing monetary relief e.g. for loss of earnings, medical expenses, loss or destruction  of property, maintenance. \n(iv) Interim custody order. \n(v) Compensation order, i.e. damages for injuries\n including mental torture and emotional distress  caused to the aggrieved." ]
+      },
+      {
+          "tag": "domestic viomeaning",
+          "patterns": [ "What does  Domestic Violence actually mean", "explain actual meaning of domestic violence" ],
+          "responses": [ "The term Domestic Violence means any act, omission or conduct which harms or injures or endangers the health, safety, life, limb or well-being, whether mental or physical, of the aggrieved person, constitutes domestic violence.Thus, domestic violence would include everything which harms or tends to cause any mental, physical, emotional, sexual or economical harm/inury to the aggrieved woman." ]
+      },
+      {
+          "tag": "physical ab",
+          "patterns": [ "What is Physical abuse ?", "explain  Physical abuse ?" ,"Tell me about Physical abuse ?"],
+          "responses": [ "physical abuse means any act or conduct which is of such a nature as to cause bodily pain, harm, or danger to life, limb, or health or impair the health or development of the aggrieved person and includes assault, criminal intimidation and criminal force." ]
+      },
+      {
+          "tag": "Sexual abuse",
+          "patterns": [ "What is Sexual abuse ?", "explain Sexual abuse ?", "tell me about Sexual abuse ??" ],
+          "responses": [ "sexual abuse includes any conduct of a sexual nature that abuses, humiliates, degrades or otherwise violates the dignity of woman" ]
+      },
+      {
+          "tag": "verbal abuse",
+          "patterns": [ "What is verbal abuse?", "explain verbal abuse", "tell me about verbal abuse" ],
+          "responses": [ "(a) insults, ridicule, humiliation, name calling and insults or ridicule specially with regard to not having a child or a male child; and\n(b) repeated threats to cause physical pain to any person in whom the aggrieved person is interested." ]
+      },
+      {
+          "tag": "econocmic",
+          "patterns": [ "What is economic abuse ?", "explain economic abuse ?", "tell me about economic abuse ?" ],
+          "responses": [ "(a) deprivation of all or any economic or financial resources to which the aggrieved person is entitled under any law or custom whether payable under an order of a court or otherwise or which the aggrieved person requires out of necessity including, but not limited to, household necessities for the aggrieved person and her children, if any, stridhan, property, jointly or separately owned by the aggrieved person, payment of rental related to the shared household and maintenance;.","Disposal of household effects, any alienation of assets whether movable or immovable, valuables, shares, securities, bonds and the like or other property in which the aggrieved person has an interest or is entitled to use by virtue of the domestic relationship or which may be reasonably required by the aggrieved person or her children or her stridhan or any other property jointly or separately held by the aggrieved person;" ]
+      }
+    ]
+      
+}

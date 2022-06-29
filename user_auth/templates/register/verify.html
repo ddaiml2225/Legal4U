@@ -1,0 +1,74 @@
+{% extends 'base.html' %} {% load static %} {% block title %}<title>
+  Register
+</title>
+{% endblock title %} {% block content %}
+{% if alert %}
+<div class="alert alert-{{status}} alert-dismissible fade show" role="alert">
+  <strong>{{heading}}!</strong> {{message}}
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+{% endif %} 
+<br/><br/>
+<div style="text-align: center" class="">
+  <div class="row d-flex justify-content-center">
+    <div class="col-lg-6">
+      <button class="alert alert-secondary" id="start-camera">
+        Start Camera
+      </button>
+    </div>
+    <div class="col-lg-6">
+      <video id="video" width="320" height="240" autoplay></video>
+    </div>
+  </div>
+  <br /><br />
+  <div class="row d-flex justify-content-center">
+    <div class="col-lg-6">
+      <button class="alert alert-secondary" id="click-photo">
+        Click Photo
+      </button>
+    </div>
+    <div class="col-lg-6">
+      <canvas id="canvas" width="320" height="240"></canvas>
+    </div>
+  </div>
+  <br /><br />
+</div>
+
+<form action="" method="post">
+  {% csrf_token %}
+  <input type="hidden" id="width" name="width" >
+  <input type="hidden" id="height" name="height">
+  <input type="hidden" id = "face" name="face">
+  <div class="text-center"><button class="alert alert-secondary mx-4" id="submit">Submit</button></div>
+</form>
+
+{% endblock content %} {% block scripts %}
+<script src="{% static 'js/jquery.min.js' %}"></script>
+<script src="{% static 'js/popper.min.js' %}"></script>
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+<script src="{% static 'js/all.min.js' %}"></script>
+<script>
+  let camera_button = document.querySelector("#start-camera");
+  let video = document.querySelector("#video");
+  let click_button = document.querySelector("#click-photo");
+  let canvas = document.querySelector("#canvas");
+
+  camera_button.addEventListener("click", async function () {
+    let stream = await navigator.mediaDevices.getUserMedia({
+      video: true,
+      audio: false,
+    });
+    video.srcObject = stream;
+  });
+
+  click_button.addEventListener("click", function () {
+    canvas.getContext("2d").drawImage(video, 0, 0, canvas.width, canvas.height);
+    let image_data_url = canvas.toDataURL("image/jpeg");
+    document.getElementById("face").value = image_data_url;
+    document.getElementById("width").value = canvas.width;
+    document.getElementById("height").value = canvas.height;
+  });
+</script>
+{% endblock scripts %}}

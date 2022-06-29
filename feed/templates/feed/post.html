@@ -1,0 +1,84 @@
+{% extends 'base.html' %} 
+{% load static %} 
+{% block title %} <title>Post</title> {% endblock title %} 
+{% block content %}
+
+<div class="infinite-container">
+  {% for card in comments %}
+  <div class="infinite-item my-2 w-75" style="padding-left: {{card.indent}}%; padding-right: {{card.indent}}%">
+    <div class="d-flex justify-content-center">
+      <div class="card border-dark w-100">
+        <div class="card-header">
+          {{card.nick}}
+          {% if card.verified %}<span><i class="fa-solid fa-circle-check"></i></span>{% endif %}
+          {% if card.is_lawyer %}<span><i class="fa-solid fa-graduation-cap mx-2"></i></span>{% endif %}
+        </div>
+        <div class="card-body text-dark">
+          <h5 class="card-title">{{card.title}}</h5>
+          <p class="card-text">{{card.content}}</p>
+          <button onclick="toggleForm({{card.id}})" class="btn btn-primary">Reply</button>
+          <div class="toggler" id="myForm{{card.id}}" style="display:none">
+            <form method='POST'>
+              {% csrf_token %}
+              <div class="form-group">
+                <label for="postTitle">Title</label>
+                <input type="text" class="form-control" id="postTitle" name="title" placeholder="Confused about something?">
+              </div>
+              <div class="form-group">
+                <label for="postContent">Content*</label>
+                <textarea class="form-control" id="postContent" name = "content" rows="3"></textarea>
+              </div>
+              <input type="hidden" name="reply_id" value="{{card.id}}">
+              <button type="submit" class="btn btn-primary">Reply</button>
+            </form>
+          </div>
+          <div class="card-footer text-muted text-right">
+            {{card.timestamp}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+
+<div>
+  <span>
+    {% if comments.has_next %}
+    <a class="infinite-more-link" href="?page={{comments.next_page_number}}">
+      More
+    </a>
+    {% endif %}
+  </span>
+</div>
+
+<div class="loading" style="display: none">Loading...</div>
+{% endblock content %}
+
+{% block scripts %}
+<script src="{% static 'js/jquery.waypoints.min.js' %}"></script>
+<script src="{% static 'js/infinite.min.js' %}"></script>
+
+<script>
+  var infinite = new Waypoint.Infinite({
+    element: $(".infinite-container")[0],
+    offset: "bottom-in-view",
+    onBeforePageLoad: function () {
+      $(".loading").show();
+    },
+    onAfterPageLoad: function ($items) {
+      $(".loading").hide();
+    },
+  });
+
+  function toggleForm(cardid){
+    var x = document.getElementById("myForm"+cardid);
+    console.log(x);
+    if (x.style.display === "none") {
+      x.style.display = "block";
+    } else {
+      x.style.display = "none";
+    }
+  }
+</script>
+{% endblock scripts %}

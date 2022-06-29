@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+  <head>
+    {% comment %} We are using Bootstrap version 4.0.0 {% endcomment %}
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300&display=swap" rel="stylesheet">
+    <link
+      rel="shortcut icon"
+      type="image/png"
+      href="{% static 'images/other/fio.png' %}"
+    />
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="{% static 'css/all.min.css' %}" />
+    {% block title %}{% endblock title %}
+  </head>
+  <body>
+    <div class="contaniner-fluid">
+      {% comment %}
+      <div class="row">
+        <!--marquee text satrt-->
+        <div class="col-12">
+          <marquee
+            onmouseover="this.stop();"
+            onmouseout="this.start();"
+            direction="left"
+            scrollamount="5"
+          >
+            <ul class="ticker-left">
+              <li>
+                𝐋𝐞𝐠𝐚𝐥𝟒𝐔 Legal Service Administration | Contact Us: Ms.Dipali
+                D.Awasekar, Navi Peth Solapur | Email us at :
+                contact𝐋𝐞𝐠𝐚𝐥𝟒𝐔@gmail.com | Mobile : +91 9146312280
+              </li>
+            </ul>
+          </marquee>
+        </div>
+      </div>
+      {% endcomment %}
+      <div class="row mt-2">
+        <!-- Navbar -->
+        <div class="col-12">
+          <nav>
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+              <a class="navbar-brand" href="/">
+                <img
+                  src="{% static 'images/logos/logo_circle.png' %}"
+                  class="mb-2"
+                  alt=""
+                  height="58"
+                  width="58"
+                  srcset=""
+                />
+                𝐋𝐞𝐠𝐚𝐥𝟒𝐔
+              </a>
+              <button
+                class="navbar-toggler"
+                type="button"
+                data-toggle="collapse"
+                data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
+              >
+                <span class="navbar-toggler-icon"></span>
+              </button>
+
+              <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                  <li class="nav-item">
+                    <a class="nav-link" href="/chatbot/" style="font-size: 22px"
+                      >Talk to Us</a
+                    >
+                  </li>
+
+                  {% comment %} <li class="nav-item">
+                    <a class="nav-link" href="#" style="font-size: 22px"
+                      >Learning Center</a
+                    >
+                  </li> {% endcomment %}
+
+                  <li class="nav-item">
+                    <a class="nav-link" href="/feed" style="font-size: 22px"
+                      >𝐋𝐞𝐠𝐚𝐥𝟒𝐔 Talks</a
+                    >
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="/auth/profile" style="font-size: 22px"
+                      >My Cases</a>
+                  </li>
+                  <li class="nav-item">
+                    <a
+                      class="nav-link"
+                      onclick="gotoNext()"
+                      style="font-size: 22px"
+                      >Contact Us</a
+                    >
+                  </li>
+
+                  {% if not is_active %}
+                    <li class="nav-item">
+                      <a
+                        class="nav-link"
+                        style="font-size: 22px"
+                        href="{% url 'register' %}"
+                        >Register</a
+                      >
+                    </li>
+                  {% endif %}
+                </ul>
+                {% if not is_active %}
+                  <button
+                    type="button"
+                    class="btn btn-light"
+                    data-toggle="modal"
+                    data-target="#exampleModal"
+                  >
+                    Login
+                  </button>
+                {% else %}
+                  <a href="/auth/logout_users" class="btn btn-light"> Logout </a>
+                {% endif %}
+              </div>
+            </nav>
+          </nav>
+        </div>
+      </div>
+    </div>
+    <!-- Modal -->
+    <div
+      class="modal fade"
+      id="exampleModal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Login here</h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            {% if indres == 1 %}
+              <div class="alert alert-danger" role="alert">
+                User doesn't exists !
+            </div>
+              <script>
+                alert("User Doesn't exists !")                
+              </script>
+              {% elif invalid == 1 %}
+              <div class="alert alert-danger" role="alert">
+                Invalid Password !
+            </div>
+              <script>
+                  alert("Invalid Password !")
+              </script>
+              
+            {% endif %}
+            
+            <div class="container">
+              <div class="row">
+                <div class="col">
+                  <form action="/auth/login_users/" method="POST">
+                    {% csrf_token %}
+                    <div class="form-group">
+                      <select class="custom-select" name="usertyp">
+                        <option selected hidden>--Login as--</option>
+                        <option value="V">Anonymous User</option>
+                        <option value="L">Lawyer</option>
+                      </select>
+                    </div>
+                    <div class="mb-3">
+                      <input
+                        type="email"
+                        class="form-control"
+                        id="exampleInputEmail1"
+                        name="email"
+                        placeholder="Email"
+                        aria-describedby="emailHelp"
+                      />
+                    </div>
+                    <div class="mb-3">
+                      <input
+                        type="password"
+                        class="form-control"
+                        name="password"
+                        placeholder="Password"
+                        id="exampleInputPassword1"
+                      />
+                    </div>
+                    <button class="btn btn-dark">Login</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer"></div>
+        </div>
+      </div>
+    </div>
+
+    {% block content %}
+    <!-- every app can insert content here -->
+    {% endblock content %}
+    <!-- Footer -->
+    <footer class="mt-5">
+      <div
+        class="container-fluid pl-md-4 pr-md-4 p-3"
+        style="background-color: #2f3542"
+        id="foot"
+      >
+        <div class="row">
+          <div class="col-md-3 p-3">
+            <img
+              class="d-block w-100 img-fluid"
+              src='{%static "/images/logos/logo_main.png"%}'
+              alt="First slide"
+              style="height: 190px"
+            />
+          </div>
+          <div class="col-md-3 text-left" style="color: ghostwhite">
+            <h3>Know Your Legal Rights</h3>
+            <h5>* Domestic Violence</h5>
+            <h5>* Sexual Harassment</h5>
+            <h5>* Women's Property Rights</h5>
+            <h5>* Marriage & Divorce</h5>
+            <h5>* Cyber Bulling</h5>
+            <h5>* Chile Related</h5>
+          </div>
+          <div class="col-md-3 text-left" style="color: ghostwhite">
+            <h3>Services</h3>
+            <h5>* Get free Legal Assistance</h5>
+            <h5>* For further legal assistance schedule an online meeting</h5>
+            <h5>* Get empowered to seek justice</h5>
+          </div>
+
+          <div class="col-md-3 text-left" style="color: ghostwhite">
+            <h3>Contact us</h3>
+            <h5>Name : Ms.Dipali D.Awasekar</h5>
+            <h5>Address : Navi Peth Solapur</h5>
+            <h5>
+              Mobile :
+              <a href="tel:+91 9146312280" style="color: #fff"
+                >+91 9146312280</a
+              >
+            </h5>
+          </div>
+        </div>
+      </div>
+      <div class="container-fluid p-4">
+        <div class="row">
+          <div class="col-12 text-center">
+            <a
+              href="index.html"
+              target="_blank"
+              style="color: #2f3542; font-weight: bold"
+              >© Copyright Protected 2021-22 | 𝐋𝐞𝐠𝐚𝐥𝟒𝐔 | All rights reserved
+            </a>
+          </div>
+          <div
+            class="col-12 text-center p-3"
+            style="font-size: 30px; color: #2f3542"
+          >
+            <i class="fa-brands fa-instagram"></i>
+            <i class="fa-brands fa-facebook pl-2"></i
+            ><i class="fa-brands fa-twitter pl-3"></i>
+
+            <i class="fa-brands fa-whatsapp pl-2"></i>
+            <i class="fa-brands fa-youtube pl-2"></i>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'js/popper.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/all.min.js' %}"></script>
+    {% block scripts %} {% comment %} load javascript files which are dependent
+    on above js files and require them to be loaded first {% endcomment %} 
+    {% endblock scripts %}
+    <script type="text/javaScript">
+      function gotoNext() {
+        document.querySelector("#foot").scrollIntoView({
+          behavior: "smooth",
+
+        });
+      }
+    </script>
+  </body>
+</html>

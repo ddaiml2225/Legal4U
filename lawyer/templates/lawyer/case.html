@@ -1,0 +1,81 @@
+{% extends 'base.html' %} {% load static %} {% block title %}
+<title>𝐋𝐞𝐠𝐚𝐥𝟒𝐔 | Pending Cases</title>
+{% endblock title %} {% block content %}
+<div class="container mt-3">
+  <div class="row">
+    <div class="col-sm-8">
+      <h1 class="text-center alert alert-dark mt-2">All pending cases</h1>
+      <div class="infinite-container">
+        {% for card in cards %}
+        <div class="infinite-item w-75 mx-auto">
+          <div class="d-flex justify-content-center">
+            <div class="card border-dark my-3 w-100">
+              <div class="card-header">{{card.nick}}</div>
+              <div class="card-body text-dark">
+                <h5 class="card-title">{{card.title}}</h5>
+                <p class="card-text">{{card.content}}</p>
+                <a href="case/{{card.id}}" class="btn btn-primary my-2"
+                  >Accept Case</a
+                >
+                <div class="card-footer text-muted text-right">
+                  {{card.timestamp}}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+      <div>
+        <span>
+          {% if cards.has_next %}
+          <a class="infinite-more-link" href="?page={{cards.next_page_number}}">
+            More
+          </a>
+          {% endif %}
+        </span>
+      </div>
+      <div class="loading" style="display: none">Loading...</div>
+      
+    </div>
+    <div class="col-sm-4" style="outline: auto; outline-style: round;">
+      <h1 class="text-center alert alert-dark mt-2">Accepted cases</h1>
+        {% for card in accepted_cards %}
+        <div class="infinite-item w-75 mx-auto">
+          <div class="d-flex justify-content-center">
+            <a href="case/detail/{{card.id}}" style="color: inherit; text-decoration: inherit">
+              <div class="card border-dark bg-success text-white my-3 w-100">
+                <div class="card-header">{{card.nick}}</div>
+                <div class="card-body">
+                  <h5 class="card-title">{{card.title}}</h5>
+                  <p class="card-text">{{card.content}}</p>
+                  <div class="card-footer text-right">
+                    {{card.timestamp}}
+                  </div>
+                </div>
+              </div>
+            </a>
+          </div>
+        </div>
+        {% endfor %}
+    </div>
+  </div>
+</div>
+
+{% endblock content %} {% block scripts %}
+<script src="{% static 'js/jquery.waypoints.min.js' %}"></script>
+<script src="{% static 'js/infinite.min.js' %}"></script>
+
+<script>
+  var infinite = new Waypoint.Infinite({
+    element: $(".infinite-container")[0],
+    offset: "bottom-in-view",
+    onBeforePageLoad: function () {
+      $(".loading").show();
+    },
+    onAfterPageLoad: function ($items) {
+      $(".loading").hide();
+    },
+  });
+</script>
+{% endblock scripts %}

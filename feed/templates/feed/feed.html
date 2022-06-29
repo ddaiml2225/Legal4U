@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} <title>Feed</title> {% endblock title %}
+{% block content %}
+<h1 style="margin:3rem; text-align: center; font-family: Trebuchet MS, Helvetica, sans-serif;">Leagal4u Talks</h1>
+<!-- <img
+        style="height:6rem; margin: auto;
+        display: block;"
+        src="{% static '/images/titles/the_talks.jpg' %}"
+        class="d-block  img-fluid"
+        alt="talk"
+            /> -->
+<div class="card border-dark my-2 w-75 mx-auto">
+  <div class="card-body">
+    <h5 class="card-title">Create a Post</h5>
+    <div class="text-center">
+      <form method='POST'>
+        {% csrf_token %}
+        <div class="form-group">
+          <label for="postTitle">Title</label>
+          <input type="text" class="form-control" id="postTitle" name="title" placeholder="Confused about something?">
+        </div>
+        <div class="form-group">
+          <label for="postContent">Content</label>
+          <textarea class="form-control" id="postContent" name = "content" rows="3"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Post</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+<div class="infinite-container">
+  {% for card in cards %}
+  <div class="infinite-item w-75 mx-auto">
+    <a href="{{card.id}}" style="color: inherit; text-decoration: inherit">
+      <div class="d-flex justify-content-center">
+        <div class="card border-dark my-3 w-100">
+          <div class="card-header">
+            {{card.nick}}
+            {% if card.verified %}<span><i class="fa-solid fa-circle-check mx-2"></i></span>{% endif %}
+            {% if card.is_lawyer %}<span><i class="fa-solid fa-graduation-cap mx-2"></i></span>{% endif %}
+          </div>
+          <div class="card-body text-dark">
+            <h5 class="card-title">{{card.title}}</h5>
+            <p class="card-text">{{card.content}}</p>
+            <div class="card-footer text-muted text-right">
+              {{card.timestamp}}
+            </div>
+          </div>
+        </div>
+      </div>
+    </a>
+  </div>
+  {% endfor %}
+</div>
+
+<div>
+  <span>
+    {% if cards.has_next %}
+    <a class="infinite-more-link" href="?page={{cards.next_page_number}}">
+      More
+    </a>
+    {% endif %}
+  </span>
+</div>
+
+<div class="loading" style="display: none">Loading...</div>
+{% endblock content %}
+
+{% block scripts %}
+<script src="{% static 'js/jquery.waypoints.min.js' %}"></script>
+<script src="{% static 'js/infinite.min.js' %}"></script>
+
+<script>
+  var infinite = new Waypoint.Infinite({
+    element: $(".infinite-container")[0],
+    offset: "bottom-in-view",
+    onBeforePageLoad: function () {
+      $(".loading").show();
+    },
+    onAfterPageLoad: function ($items) {
+      $(".loading").hide();
+    },
+  });
+</script>
+{% endblock scripts %}

@@ -1,0 +1,139 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+<title>𝐋𝐞𝐠𝐚𝐥𝟒𝐔 | Home</title>
+<link rel="stylesheet" href="{% static '/css/login.css' %}" />
+{% endblock title %}
+{% block content %}
+<h1 class="text-center alert alert-dark">Sign up</h1>
+<section class="vh-100">
+    <div class="container h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-lg-12 col-xl-11">
+          <div class="card text-black" style="border-radius: 25px;">
+            <div class="card-body p-md-5">
+              <div class="row d-flex justify-content-center">
+                <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1 items">
+  
+                  <!-- <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Sign up</p> -->
+  
+                  <form onsubmit="return validateAdmin()" class="mx-1 mx-md-4" method = "POST">
+                    {% csrf_token %}
+                    <div class="d-flex flex-row align-items-center mb-4">
+                      <i class="fas fa-user fa-lg me-3 fa-fw mb-4 mr-3"></i>
+                      <div class="form-outline flex-fill mb-0">
+                        <label class="form-label" for="Name">Admin Name</label>
+                        <input type="text" id="Name" class="form-control" name="name"/>
+                        <span id="nameerror1" class="text-danger font-weight-bold"></span>
+                      </div>
+                    </div>
+  
+                    <div class="d-flex flex-row align-items-center mb-4">
+                      <i class="fas fa-envelope fa-lg me-3 fa-fw mb-4 mr-3"></i>
+                      <div class="form-outline flex-fill mb-0">
+                        <label class="form-label" for="Email">Email</label>
+                        <input type="email" id="Email" class="form-control" name="email"/>
+                        <span id="emailerror1" class="text-danger font-weight-bold"></span>
+                      </div>
+                    </div>
+  
+                    <div class="d-flex flex-row align-items-center mb-4">
+                        <i class="far fa-calendar-alt fa-lg me-3 fa-fw mb-4 mr-3 "></i>
+                        <div class="form-outline flex-fill mb-0">
+                          <label class="form-label" for="DOB">Date Of Birth</label>
+                          <input type="date" id="DOB" class="form-control" name="dob"/>
+                        </div>
+                      </div>
+
+                    <div class="d-flex flex-row align-items-center mb-4">
+                      <i class="fas fa-lock fa-lg me-3 fa-fw mb-4 mr-3"></i>
+                      <div class="form-outline flex-fill mb-0">
+                        <label class="form-label" for="Password">Password</label>
+                        <input type="password" id="Password" class="form-control" name="password"/>
+                        <span id="passworderror1" class="text-danger font-weight-bold"></span>
+                      </div>
+                    </div>
+  
+                    <div class="d-flex flex-row align-items-center mb-4">
+                      <i class="fas fa-key fa-lg me-3 fa-fw mb-4 mr-3"></i>
+                      <div class="form-outline flex-fill mb-0">
+                        <label class="form-label" for="CPassword">Repeat password</label>
+                        <input type="password" id="CPassword" class="form-control" />
+                        <span id="cmpassworderror1" class="text-danger font-weight-bold"></span>
+                      </div>
+                    </div>
+  
+                    <div class="form-check d-flex justify-content-center mb-5">
+                      <div class="row">
+                        <div class="col-lg-3 "></div>
+                        <input class="form-check-input me-2" type="checkbox" value="" id="form2Example3c" />
+                      </div>
+                      <div class="col-lg-9">
+                        <label class="form-check-label" for="form2Example3">
+                          I agree all statements in <a href="#!">Terms of service</a>
+                        </label>
+                      </div>
+                      
+                    </div>
+  
+                    <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+                      <button type="submit" class="btn btn-dark btn-lg">Register</button>
+                    </div>
+  
+                  </form>
+  
+                </div>
+                <div class="col-md-10 col-lg-6  d-flex justify-content-center order-1 order-lg-2 image">
+  
+                  <img src="{% static 'images/other/register.png' %}"
+                    class="img-fluid" alt="Sample image">
+  
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+</section>
+
+<script>
+  
+  function validateAdmin(){
+    let fname = document.getElementById('Name').value
+    let email = document.getElementById('Email').value
+    let password = document.getElementById('Password').value
+    let cmpassword = document.getElementById('CPassword').value
+    
+    
+
+    let usercheck = /^[A-Za-z\s]{3,30}[\.]{0,1}[A-Za-z\s]{3,30}$/
+    let passwordcheck =  /^[A-Za-z0-9]{8,15}$/;
+    let emailcheck = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
+    
+
+    if(!usercheck.test(fname)){
+      document.getElementById('nameerror1').innerHTML = "*Invalid";
+      return false
+    }
+    else if(!emailcheck.test(email)){
+      document.getElementById('emailerror1').innerHTML = "*Invalid";
+      return false
+    }
+    
+    else if(!passwordcheck.test(password)){
+      document.getElementById('passworderror1').innerHTML = "*Invalid";
+      return false
+    }
+    else if(!passwordcheck.test(cmpassword)){
+      document.getElementById('cmpassworderror1').innerHTML = "*Invalid";
+      return false
+    }
+    else if(password != cmpassword){
+      document.getElementById('cmpassworderror1').innerHTML = "Password Doesn't match";
+      return false
+    }
+  }
+</script>
+{% endblock content %}

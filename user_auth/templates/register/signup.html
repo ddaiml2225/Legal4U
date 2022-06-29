@@ -1,0 +1,298 @@
+{% extends 'base.html' %} {% load static %} {% block title %}
+<title>Register</title> {% endblock title %} {% block content %}
+<div class="container mt-5">
+  <div class="row d-flex justify-content-center">
+    <div class="col-sm-6">
+      <h3>Anonymous user registration</h3>
+      
+      <form action="/auth/user1/" onsubmit="return validateRegistration()" method="POST">
+        {% csrf_token %}
+        <div class="form-group">
+          <input
+            type="email"
+            class="form-control"
+            name="email"
+            id="email"
+            placeholder="Enter email"
+            autocomplete="on"
+          />
+          <span id="emailerror" class="text-danger font-weight-bold"></span>
+        </div>
+        <div class="form-group">
+          <input
+            type="text"
+            class="form-control"
+            name="fname"
+            id="fname"
+            placeholder="Enter full name"
+            autocomplete="on"
+          />
+          <span id="fnameerror" class="text-danger font-weight-bold"></span>
+        </div>
+        <div class="form-group">
+          <small id="birthday">Date of birth</small>
+          <input class="form-control" type="date" id="birthday1" name="dob" required />
+          <span id="dateerror" class="text-danger font-weight-bold"></span>
+        </div>
+        <div class="form-group">
+          <input
+            type="password"
+            class="form-control"
+            name="password"
+            id="password"
+            placeholder="Password"
+            autocomplete="off"
+          />
+          <span id="passworderror" class="text-danger font-weight-bold"></span>
+        </div>
+        {% comment %} <div class="form-group">
+          <input
+            type="text"
+            class="form-control"
+            name="aadhar"
+            id="enrollment"
+            placeholder="Enter enrollment number"
+            autocomplete="on"
+          />
+          <span
+            id="enrollmenterror"
+            class="text-danger font-weight-bold"
+          ></span>
+        </div> {% endcomment %}
+        <div class="form-group">
+          <input
+            type="text"
+            class="form-control"
+            name="nick"
+            id="nick"
+            placeholder="Enter public nickname"
+            autocomplete="on"
+          />
+          <span id="nicerror" class="text-danger font-weight-bold"></span>
+        </div>
+        <button type="submit" class="btn btn-dark">Register</button>
+      </form>
+    </div>
+
+    <div class="col-sm-6">
+      <h3>Register as Laywer</h3>
+      <form  action="/auth/user2/" onsubmit="return validateRegistrationLawyer()" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="form-group">
+          <input
+            type="email"
+            id="email1"
+            class="form-control"
+            name="email"
+            placeholder="Enter email"
+            autocomplete="on"
+          />
+        <span id="emailerror1" class="text-danger font-weight-bold"></span>
+        </div>
+        <div class="form-group">
+          <input
+            type="text"
+            class="form-control"
+            name="fname"
+            id="fname1"
+            placeholder="Enter full name"
+            autocomplete="on"
+          />
+          <span id="fnameerror1" class="text-danger font-weight-bold"></span>
+        </div>
+        <div class="form-group">
+          <input
+            type="text"
+            class="form-control"
+            name="nick"
+            id="nick1"
+            placeholder="Enter public nickname"
+            autocomplete="on"
+          />
+          <span id="nickerror1" class="text-danger font-weight-bold"></span>
+        </div>
+        <div class="form-group">
+          <input
+            type="text"
+            class="form-control"
+            name="number"
+            id="number1"
+            placeholder="Mobile number"
+            autocomplete="on"
+          />
+          <span id="mobileerror1" class="text-danger font-weight-bold"></span>
+        </div>
+        <div class="form-group">
+          <input
+            type="password"
+            class="form-control"
+            name="password"
+            id="password1"
+            placeholder="Password"
+            autocomplete="off"
+          />
+          <span id="passworderror1" class="text-danger font-weight-bold"></span>
+        </div>
+        <div class="form-group">
+          <input
+            type="number"
+            class="form-control"
+            name="exp"
+            id="exp"
+            placeholder="Years of experience (0-10)"
+            autocomplete="off"
+          />
+          <span id="experror1" class="text-danger font-weight-bold"></span>
+        </div>        
+        <div class="form-group">
+          <input
+            type="text"
+            class="form-control"
+            name="enroll_id"
+            id="enrollment1"
+            placeholder="Lawyer ID number"
+            autocomplete="on"
+          />
+          <span id="enrollmenterror1" class="text-danger font-weight-bold"></span>
+        </div>        
+        <div class="form-group">
+          <small id="birthday">Date of birth</small>
+          <input class="form-control" type="date" id="birthday" name="dob" required />
+        </div>
+        <div class="form-group">
+          <small id="birthday">Gender</small>
+          <select class="custom-select" id="gender" name="gender">            
+            <option value="M" selected>Male</option>
+            <option value="F">Female</option>
+          </select>
+        </div>
+        <div class="input-group">
+          <select class="custom-select" id="probono" name="probono">
+            <option selected hidden value="x">
+              Do you agree to register as Pro-Bono lawyer?
+            </option>
+            <option value="1">Yes</option>
+            <option value="0">No</option>
+          </select>
+          <span id="probonoerror1" class="text-danger font-weight-bold"></span>
+        </div>
+        <br>
+        <div class="form-group">
+          <div class="custom-file">
+            <input type="file" id="customFile" name="idImg" />
+          </div>
+        </div>
+        <br />        
+        <button type="submit" class="btn btn-dark" value="Upload">
+          Register
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+<script type="text/javaScript">
+
+  function validateRegistration(){
+    let email = document.getElementById('email').value
+    let fname = document.getElementById('fname').value
+    let password = document.getElementById('password').value
+    let enrollment = document.getElementById('enrollment').value
+    let nick = document.getElementById('nick').value
+
+    let usercheck = /^[A-Za-z\s]{3,30}[\.]{0,1}[A-Za-z\s]{3,30}$/
+    let passwordcheck =  /^[A-Za-z0-9]{8,15}$/;
+    let emailcheck = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
+    let enrollmentecheck = /^[1-9]{5}/;
+
+    if(!emailcheck.test(email)){
+      document.getElementById('emailerror').innerHTML = "*Invalid";
+      return false
+    }
+    else if(!usercheck.test(fname)){
+      document.getElementById('fnameerror').innerHTML = "*Invalid";
+      return false
+    }
+    else if(!passwordcheck.test(password)){
+      document.getElementById('passworderror').innerHTML = "*Invalid";
+      return false
+    }
+    else if(!enrollmentecheck.test(enrollment)){
+      document.getElementById('enrollmenterror').innerHTML = "*Invalid";
+      return false
+    }
+    else if(!usercheck.test(nick)){
+      document.getElementById('nickerror').innerHTML = "*Invalid";
+      return false
+    }
+  }
+   
+   function validateRegistrationLawyer(){
+
+    let email = document.getElementById('email1').value
+    let fname = document.getElementById('fname1').value
+    let nick = document.getElementById('nick1').value
+    let mobile_number = document.getElementById('number1').value
+    let password = document.getElementById('password1').value
+    let year_of_exp = document.getElementById('exp').value
+    let enrollment = document.getElementById('enrollment1').value
+    let probono = document.getElementById('probono').value
+    let imgPro = document.getElementById('customFile').value
+    
+
+    let usercheck = /^[A-Za-z\s]{3,30}[\.]{0,1}[A-Za-z\s]{3,30}$/
+    let passwordcheck =  /^[A-Za-z0-9]{8,15}$/;
+    let emailcheck = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
+    let enrollmentecheck = /^[1-9]{4}/;
+    let mobilecheck = /^[0-9][0-9]{9}$/
+    
+    if(!emailcheck.test(email)){
+      document.getElementById('emailerror1').innerHTML = "*Invalid";
+      return false
+    }
+    else if(!usercheck.test(fname)){
+      document.getElementById('fnameerror1').innerHTML = "*Invalid";
+      return false
+    }
+    else if(!usercheck.test(nick)){
+      document.getElementById('nickerror1').innerHTML = "*Invalid";
+      return false
+    }
+    else if(!mobilecheck.test(mobile_number)){
+      document.getElementById('mobileerror1').innerHTML = "*Invalid";
+      return false
+    }
+    else if(!passwordcheck.test(password)){
+      document.getElementById('passworderror1').innerHTML = "*Invalid";
+      return false
+    }
+    else if(!(parseInt(year_of_exp) >= 0 && parseInt(year_of_exp) <= 10)){
+      document.getElementById('experror1').innerHTML = "*Invalid";
+      return false
+    }
+    else if(!enrollmentecheck.test(enrollment)){
+      document.getElementById('enrollmenterror1').innerHTML = "*Invalid";
+      return false
+    }
+    
+    else if(probono === "x"){
+      document.getElementById('probonoerror1').innerHTML = "*Select Option";
+      return false
+    }
+  else if (window.File && window.FileReader && window.FileList && window.Blob)
+{
+   var pic_size = $('#customFile')[0].files[0].size;
+   var pic_type = $('#customFile')[0].files[0].type;
+
+   var extension = pic_type.split('/').pop().toUpperCase();
+
+    if (extension!="PNG" && extension!="JPG" && extension!="GIF" && extension!="JPEG" || pic_size>=2048000)
+    {
+        alert ("Please Select PNG,JPG,GIF,JPEG Image Only and File Size not Greater than 2MB");
+        $( "#customFile" ).focus()
+        return false;
+    }
+ }
+
+  }
+</script>
+{% endblock content %}

@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+<title>𝐋𝐞𝐠𝐚𝐥𝟒𝐔 | DashBoard</title>
+{% endblock title %}
+{% block content %}
+{% if alert %}
+<div class="alert alert-danger alert-dismissible fade show" role="alert">
+  <strong>Unverified!</strong> {{message}}
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+{% endif %}
+<div class="row">
+  <div style="text-align: center;" class="col-lg-6 col-sm-12 d-flex justify-content-center mt-3">
+    <div class="card px-3" style="width: 20rem;">
+      <img class="card-img-top" src="{% static 'images/other/justice.png' %}" alt="Register">
+      <div class="card-body">
+        <h5 class="card-title">Cases</h5>
+        <p class="card-text">Check Out all the pending cases as well as the accepted cases.</p>
+        <a href="/lawyer/case" class="btn btn-dark">Check Out</a>
+      </div>
+    </div>
+  </div>
+  <div style="text-align: center;" class="col-lg-6 col-sm-12 d-flex justify-content-center mt-3">
+    <div class="card px-3" style="width: 20rem;">
+      <img class="card-img-top" src="{% static 'images/other/verify.webp' %}" alt="Register">
+      <div class="card-body">
+        <h5 class="card-title">General Discussion</h5>
+        <p class="card-text">Contribute to the female forum</p>
+        <a href="/feed" class="btn btn-dark">Forum</a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}

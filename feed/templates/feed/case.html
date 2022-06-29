@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+  <title>𝐋𝐞𝐠𝐚𝐥𝟒𝐔 | Case</title>
+{% endblock title %}
+{% block content %}
+  <div class="card bg-{{status}} w-75 mx-auto my-2 text-white">
+    <div class="card-body">
+      <h6 class="card-subtitle mb-2 text-white">Posted By: {{username}} {% if verified %}<span><i class="fa-solid fa-circle-check"></i></span>{% endif %}</h6>
+      <h5 class="card-title">{{title}}</h5>
+      <p class="card-text">{{content}}</p>
+    </div>
+    {% if status == 'success' %}
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item bg-success">Accepted By: {{lawyername}}</li>
+        <li class="list-group-item bg-success">Lawyer Email: {{lawyeremail}}</li>
+        <li class="list-group-item bg-success">Lawyer Phone: {{lawyerphone}}</li>
+        <li class="list-group-item bg-success">Lawyer Gender: {{lawyersex}}</li>
+        <li class="list-group-item bg-success">Lawyer Experience: {{lawyerexp}}</li>
+    </ul>
+    {% else %}
+    <p class="card-text ml-3">Case is yet to be accepted, please wait for lawyers.</p>
+    {% endif %}
+    <div class="card-footer text-white text-right">
+      {{timestamp}}
+    </div>
+  </div>
+{% endblock content %}

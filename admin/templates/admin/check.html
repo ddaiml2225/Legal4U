@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+  <title>𝐋𝐞𝐠𝐚𝐥𝟒𝐔 | All Users</title>
+{% endblock title %}
+{% block content %}
+<div class="row">
+  <div class="col-lg-3 col-sm-12 d-flex justify-content-center mt-3">
+    <div class="scrollable" style="overflow-y: auto;max-height: 1100px;">
+      <h5 class="text-center my-2 myheading">UnVerified Users</h5>
+      <ul class="list-group">
+        {% for i in unverified_users %}
+          <li class="list-group-item align-items-center my-2 mx-2">
+            Nickname: {{i.nick}} <br>
+            <span>Email: {{i.email}}</span>
+          </li>
+        {% endfor %}
+    </div>
+  </div>
+  <div class="col-lg-3 col-sm-12 d-flex justify-content-center mt-3">
+    <div class="scrollable" style="overflow-y: auto;max-height: 1100px;">
+      <h5 class="text-center my-2 myheading">Verified Users</h5>
+      <ul class="list-group">
+        {% for i in verified_users %}
+          <li class="list-group-item align-items-center my-2 mx-2">
+            Nickname: {{i.nick}} <br>
+            <span>Email: {{i.email}}</span>
+          </li>
+        {% endfor %}
+    </div>
+  </div>
+  <div class="col-lg-3 col-sm-12 d-flex justify-content-center mt-3">
+    <div class="scrollable" style="overflow-y: auto;max-height: 1100px;">
+      <h5 class="text-center my-2 myheading">UnVerified Lawyers</h5>
+      <ul class="list-group">
+        {% for i in unverified_lawyers %}
+          <li class="list-group-item align-items-center my-2 mx-2">
+            Nickname: {{i.nick}} <br>
+            <span>Email: {{i.email}}</span>
+          </li>
+        {% endfor %}
+    </div>
+  </div>
+  <div class="col-lg-3 col-sm-12 d-flex justify-content-center mt-3">
+    <div class="scrollable" style="overflow-y: auto;max-height: 1100px;">
+      <h5 class="text-center my-2 myheading">Verified Lawyers</h5>
+      <ul class="list-group">
+        {% for i in verified_lawyers %}
+          <li class="list-group-item align-items-center my-2 mx-2">
+            Nickname: {{i.nick}} <br>
+            <span>Email: {{i.email}}</span>
+          </li>
+        {% endfor %}
+    </div>
+  </div>
+</div>
+{% endblock content %}

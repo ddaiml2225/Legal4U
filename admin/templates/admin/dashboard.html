@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+<title>𝐋𝐞𝐠𝐚𝐥𝟒𝐔 | Home</title>
+{% endblock title %}
+{% block content %}
+{% if alert %}
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+  <strong>Admin Registered!</strong> Kindly share the email and password to the the new admin
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+{% endif %}
+<div class="row">
+  <div style="text-align: center;" class="col-lg-4 col-sm-12 d-flex justify-content-center mt-3">
+    <div class="card px-3" style="width: 20rem;">
+      <img class="card-img-top" src="{% static 'images/other/register.png' %}" alt="Register">
+      <div class="card-body">
+        <h5 class="card-title">Register Admin</h5>
+        <p class="card-text">Add more to your team, register them and provide them their email password</p>
+        <a href="register" class="btn btn-dark">Register</a>
+      </div>
+    </div>
+  </div>
+  <div style="text-align: center;" class="col-lg-4 col-sm-12 d-flex justify-content-center mt-3">
+    <div class="card px-3" style="width: 20rem;">
+      <img class="card-img-top" src="{% static 'images/other/users.png' %}" alt="users">
+      <div class="card-body">
+        <h5 class="card-title">Check All Users</h5>
+        <p class="card-text">Check all existing users and lawyers</p>
+        <a href="check" class="btn btn-dark">Check</a>
+      </div>
+    </div>
+  </div>
+  <div style="text-align: center;" class="col-lg-4 col-sm-12 d-flex justify-content-center mt-3">
+    <div class="card px-3" style="width: 20rem;">
+      <img class="card-img-top" src="{% static 'images/other/verify.webp' %}" alt="Register">
+      <div class="card-body">
+        <h5 class="card-title">Verify Lawyer</h5>
+        <p class="card-text">Check lawyers identity and verify if he is rightful lawyer</p>
+        <a href="verify" class="btn btn-dark">Verify</a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}

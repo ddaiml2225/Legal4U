@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+  <head>
+    {% comment %} We are using Bootstrap version 4.0.0 {% endcomment %}
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="shortcut icon"
+      type="image/png"
+      href="{% static 'images/other/fio.png' %}"
+    />
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="{% static 'css/all.min.css' %}" />
+    <title>Page Not Found</title> 
+  </head>
+  <body>
+    <h1 class="text-center alert alert-dark">Page Not Found</h1>
+    <div class="container-fluid text-center">
+      <img
+        src="{% static 'images/other/mario.png' %}"
+        class="imf-fluid w-100"
+      />
+    </div>
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'js/popper.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/all.min.js' %}"></script>
+  </body>
+</html>

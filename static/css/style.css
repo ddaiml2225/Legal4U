@@ -1,0 +1,53 @@
+/*general*/
+/* #ffbbbb */
+body {
+  text-align: center;
+  /* font-family: "Times New Roman", sans-serif; */
+  background-color: #fff;
+  font-family: 'Roboto Condensed', sans-serif;
+}
+.form-control:focus {
+  border-color: #2f3542;
+  box-shadow: 0 0 0 0.05rem #2f3542;
+}
+
+
+
+.navclass {
+  height: 2rem;
+  width: 3rem;
+}
+
+.title {
+  text-align: center;
+}
+
+.carousel-item {
+  height: 30rem;
+}
+.carousel-item img {
+  height: 30rem;
+}
+
+/*section 2*/
+.section2 {
+  margin: 2rem 1rem 2rem 1rem;
+  padding: 3rem;
+}
+.jss {
+  color: #2f3542;
+}
+.content {
+  color: #2f3542;
+}
+.card {
+  transition: transform 0.2s ease;
+}
+.card:hover {
+  transform: scale(1.1);
+}
+.card {
+  box-shadow: 0 4px 6px 0 rgba(22, 22, 26, 0.18);
+  border-radius: 0;
+  border: 0;
+}
